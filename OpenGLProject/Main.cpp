@@ -19,7 +19,7 @@ int main()
 
 
 
-	// Create a GLFWwindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
+	// Create a GLFWwindow object of 800 by 800 pixels, naming it "OpenGl Project"
 	GLFWwindow* window = glfwCreateWindow(800, 800, "OpenGL Project", NULL, NULL);
 	// Error check if the window fails to create
 	if (window == NULL)
