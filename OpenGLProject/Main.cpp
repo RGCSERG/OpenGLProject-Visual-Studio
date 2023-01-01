@@ -85,28 +85,29 @@ int main()
 	// Vertices coordinates
 	GLfloat vertices[] =
 	{
-		-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower left corner
-		0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower right corner
-		0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f // Upper corner
+		-0.5f, -0.5f, // Lower left corner
+		-0.5, 0.5, // Upper left Corner
+		0.5f, 0.5f, // Upper right Corner
+		0.5f, -0.5f // Lower right corner
 	};
 
 	// Create reference containers for the Vertex array object and the Vertex Buffer object
-	GLuint VAO, VBO;
+	GLuint VAOs[1], VBOs[1];
 
 	// Generate the VAO and VBO with only 1 object each
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
+	glGenVertexArrays(1, VAOs);
+	glGenBuffers(1, VBOs);
 
 	// Make the VAO the current Vertex Array Object by binding it
-	glBindVertexArray(VAO);
+	glBindVertexArray(VAOs[0]);
 
 	// Bind the VBO specifying its a GL_ARRAY_BUFFER
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
 	// Introduce the vertices into the VBO
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	// Configure the Vertex Attribute so that OpenGL know how to read the VBO
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	//Enable the Vertex Attriute so that OpenGL knows how to use it
 	glEnableVertexAttribArray(0);
 
@@ -129,8 +130,8 @@ int main()
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glBindVertexArray(VAOs[0]);
+		glDrawArrays(GL_LINE_LOOP, 0, 4);
 		glfwSwapBuffers(window);
 
 		// Take care of all GLFW events
@@ -138,8 +139,8 @@ int main()
 	}
 
 	// Delete all created objects
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
+	glDeleteVertexArrays(1, &VAOs[1]);
+	glDeleteBuffers(1, &VBOs[1]);
 	glDeleteProgram(shaderProgram);
 
 	// Delete window before ending the program
