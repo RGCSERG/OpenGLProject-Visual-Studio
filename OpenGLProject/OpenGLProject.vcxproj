@@ -139,6 +139,7 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="square_thing.cpp" />
+    <ClCompile Include="square_thing_indicies.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
